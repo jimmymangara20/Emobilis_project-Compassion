@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}sponsor a child today{% endblock title %}
+
+{% block content %}
+    <div id="message-container"
+         style="position: fixed; top: 90px; left: 50%; transform: translateX(-50%); width: 300px; margin: auto; z-index: 3; color: white; padding: 10px; border-radius: 5px; text-align: center; display: none; opacity: 0; transition: opacity 1s ease-out;">
+    </div>
+
+
+
+    <!-- Sponsor A child Section -->
+    <section id="sponsor_a_child" class="section light-background">
+
+        <div class="container">
+
+            <div class="row g-4">
+                {% if children %}
+                    {% for child in children %}
+                        <div class="col-11 col-lg-3 col-md-4"
+                             style="background: transparent; border-radius: 5px; box-sizing: border-box;">
+                            <div style="padding: 10px;box-sizing: border-box;background: white">
+                                <a href="{% url 'myapp:sponsorship_form' child.id %}">
+                                    <img src="{{ child.photo.url }}"
+                                         style="width: 100%; height: 250px; object-fit: contain;" alt="">
+                                </a>
+                                <p style="font-weight: bold; margin-bottom: 5px; text-align: center">{{ child.user.first_name }} {{ child.user.last_name }}({{ child.age }}
+                                    yrs)</p>
+                                <p style="margin-bottom: 5px; text-align: center">{{ child.need }}</p>
+                                {% if user.is_supporter %}
+                                    <hr>
+                                    <div style="display: flex; flex-direction: row; justify-content: space-between">
+                                        <P>Need(Kes. <b>{{ child.amount_needed }})</b></P>
+                                        <a class="support-later-delete-link"
+                                           style="text-decoration: none;color: red">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-calendar-x-fill" viewBox="0 0 16 16">
+  <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2M6.854 8.146 8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 1 1 .708-.708"/>
+</svg>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div><!-- End Service Item -->
+                    {% endfor %}
+                {% else %}
+                    <h3>No children found</h3>
+                {% endif %}
+            </div>
+        </div>
+
+    </section>
+
+{% endblock content %}

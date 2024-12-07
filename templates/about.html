@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About Us{% endblock title %}
+
+{% block content %}
+    {% if messages %}
+<ul>
+  {% for message in messages %} 
+  <li style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+    {{ message }}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+<body class="about-page">
+
+    <!-- Page Title -->
+    <div class="page-title accent-background">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">About</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="{% url 'myapp:index' %}">Home</a></li>
+            <li class="current">About</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <div class="container">
+
+        <div class="row position-relative">
+
+          <div class="col-lg-7 about-img" data-aos="zoom-out" data-aos-delay="200"> <img src="{% static 'static/assets/img/about.jpg' %}" alt="image"></div>
+
+          <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="inner-title">Welcome to our about page</h2>
+            <div class="our-story">
+              <h3>Our Story</h3>
+              <p>Chuluni Compassion project was found in 1998 by Jimmy and friends who were driven by love and compassion for young children. It is under christian foundation, where chuluni RGC is the sponsor of the project. Our mission is to give back to society by sponsoring children. </p>
+              <ul>
+                <li><i class="bi bi-check-circle"></i> <span>We sponsor children from less fortunate families </span></li>
+                <li><i class="bi bi-check-circle"></i> <span>We cater for children's spiritual welfare</span></li>
+                <li><i class="bi bi-check-circle"></i> <span>We equip children with skills</span></li>
+              </ul>
+              <p>Below is a youtube video clip that basically describes who we are and what we offer to children who pass through our hands</p>
+
+              <div class="watch-video d-flex align-items-center position-relative">
+                <i class="bi bi-play-circle"></i>
+                <a href="https://www.youtube.com/watch?v=ZPFD57vKxc4" class="glightbox stretched-link">Watch Video</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+      {% endblock content %}
+    

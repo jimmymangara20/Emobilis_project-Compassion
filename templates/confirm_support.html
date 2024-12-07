@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div style="max-width: 300px;background: white;box-shadow: 0 0 4px black;margin: 20px auto 200px;padding: 10px;border-radius: 5px">
+        <h3 style="font-size: 18px;font-weight: bold;text-align: center;margin-top: 5px">If you have confirmed on your
+            phone can you enter the receipt number to complete</h3>
+        <form action="" method="post">
+        {% csrf_token %}
+            {% if message %}
+                <div style="border: 1px solid red;padding: 10px;border-radius: 5px;margin-bottom: 5px;">
+                    <span style="color: red">{{ message }}</span>
+                </div>
+            {% endif %}
+            <input style="width: 100%;padding: 10px 5px;border: 1px solid black;border-radius: 3px;margin-bottom: 10px"
+                   type="tel" name="sponsor_number" placeholder="Payment Number">
+            <input style="width: 100%;padding: 10px 5px;border: 1px solid black;border-radius: 3px;margin-bottom: 10px"
+                   type="text" name="receipt_number" placeholder="Receipt Number">
+            <button style="width: 100%;padding: 13px 5px;background: green;color: white;border-radius: 3px;margin-bottom: 10px;border: none">
+                Confirm
+            </button>
+            <hr>
+        <p style="text-align: center">Haven't sent support yet? <a href="{% url 'myapp:sponsor_a_child' %}">Sent</a></p>
+        </form>
+
+    </div>
+{% endblock %}

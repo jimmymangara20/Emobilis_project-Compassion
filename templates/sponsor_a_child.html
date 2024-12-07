@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}sponsor a child today{% endblock title %}
+
+{% block content %}
+    <!-- Page Title -->
+    <div class="page-title accent-background">
+        <div class="container d-lg-flex justify-content-between align-items-center">
+            <h1 class="mb-2 mb-lg-0">View Children Who need Sponsors</h1>
+        </div>
+    </div><!-- End Page Title -->
+
+    <div id="message-container"
+         style="position: fixed; top: 90px; left: 50%; transform: translateX(-50%); width: 300px; margin: auto; z-index: 3; color: white; padding: 10px; border-radius: 5px; text-align: center; display: none; opacity: 0; transition: opacity 1s ease-out;">
+    </div>
+
+
+
+    <!-- Sponsor A child Section -->
+    <section id="sponsor_a_child" class="section light-background">
+
+        <div class="container">
+
+            <div class="row g-4">
+                {% if children %}
+                    {% for child in children %}
+                        <div class="col-11 col-lg-3 col-md-4"
+                             style="background: transparent; border-radius: 5px; box-sizing: border-box;">
+                            <div style="padding: 10px;box-sizing: border-box;background: white">
+                                <a href="{% url 'myapp:sponsorship_form' child.id %}">
+                                    <img src="{{ child.photo.url }}"
+                                         style="width: 100%; height: 250px; object-fit: contain;" alt="">
+                                </a>
+                                <p style="font-weight: bold; margin-bottom: 5px; text-align: center">{{ child.user.first_name }} {{ child.user.last_name }}({{ child.age }}
+                                    yrs)</p>
+                                <p style="margin-bottom: 5px; text-align: center">{{ child.need }}</p>
+                                {% if user.is_supporter %}
+                                    <hr>
+                                    <div style="display: flex; flex-direction: row; justify-content: space-between">
+                                        <P>Need(Kes. <b>{{ child.amount_needed }})</b></P>
+                                        <a class="support-later-link"
+                                           data-child-id="{{ child.id }}"
+                                           data-child-link="{% url 'myapp:support_later' child.id %}"
+                                           style="text-decoration: none;color: green">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green"
+                                                 class="bi bi-calendar-heart-fill" viewBox="0 0 16 16">
+                                                <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2M8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div><!-- End Service Item -->
+                    {% endfor %}
+                {% else %}
+                    <h3>No children found</h3>
+                {% endif %}
+            </div>
+
+
+        </div>
+
+    </section><!-- /Services Section -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const supportLinks = document.querySelectorAll('.support-later-link');
+
+            supportLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();  // Prevent page redirection
+
+                    const childId = this.dataset.childId;  // Get child ID from data attribute
+                    const childLink = this.dataset.childLink;  // Get the URL from the data attribute
+                    const messageContainer = document.getElementById('message-container');  // Container to display message
+
+                    // Use the childLink from the data attribute in the fetch request
+                    fetch(childLink, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token
+                        }
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Display the message in the message container
+                            messageContainer.innerHTML = `<p>${data.message}</p>`;
+                            messageContainer.style.background = `${data.color}`; // You can set a custom background color
+                            messageContainer.style.display = 'block';  // Make the message container visible
+                            messageContainer.style.opacity = 1;  // Fade in the message by setting opacity to 1
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            messageContainer.innerHTML = '<p>Something went wrong. Please try again later.</p>';
+                            messageContainer.style.display = 'block';  // Make the message visible
+                            messageContainer.style.opacity = 1;  // Fade in the message by setting opacity to 1
+                        });
+
+                    // Fade out the message after 3 seconds (3000ms)
+                    setTimeout(() => {
+                        messageContainer.style.opacity = 0;  // Fade out by setting opacity to 0
+                        // Optionally, hide the message completely after fading out
+                        setTimeout(() => {
+                            messageContainer.style.display = 'none';  // Hide the message container after fading out
+                        }, 500);  // Wait for the fade-out to finish before hiding it (1s duration)
+                    }, 1000);  // Fade out after 3 seconds
+                });
+            });
+        });
+    </script>
+
+
+{% endblock content %}

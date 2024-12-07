@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <h1>Children Available for Sponsorship</h1>
+  <ul>
+    {% for child in children %}
+      <li>
+        <h2>{{ sponsor.name }}</h2>
+        <p>{{ sponsor.age }} years old</p>
+        <p>{{ sponsor.religion }}</p>
+        <p>{{ sponsor.gender }}</p>
+        <img src="{{ sponsor.photo.url }}" alt="{{ sponsor.name }}">
+        <a href="{% url 'myapp:sponsor_a_child' child.id %}">Sponsor this child</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

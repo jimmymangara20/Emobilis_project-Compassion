@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Upload Successful{% endblock title %}
+
+{% block content %}
+<h2>Image Uploaded Successfully!</h2>
+    <p>View your image here:</p>
+    <img src="{{ file_url }}" alt="Uploaded Image" width="300">
+{% endblock content %}

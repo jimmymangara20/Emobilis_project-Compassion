@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Sponser Child{% endblock title %}
+
+{% block content %}
+    <style>
+    .sponsor_form_input {
+        padding: 8px 10px;
+        border-radius: 2px;
+        margin-bottom: 5px;
+        border: 1px solid gray;
+    }
+    .sponsor_form_input:focus {
+        outline: none;
+    }
+    </style>
+    <div class="col-6" style="margin: 10px auto auto;">
+        <div class="row">
+            <div class="col-5" style="padding: 5px;background: #e1dfdf">
+                <img style="width: 100%;height: 200px;object-fit: contain;" src="{{ child.photo.url }}" alt="">
+            </div>
+            <div class="col-7">
+                <p style="font-size: 16px"><b>{{ child.user.first_name }} {{ child.user.last_name }}</b></p>
+                <p style="font-size: 16px"><b>{{ child.need }}({{ child.amount_needed }})</b></p>
+                <p style="font-size: 15px"><i>{{ child.need_description }}</i></p>
+            </div>
+        </div>
+        <div style="margin-top: 10px;border: 1px solid green;padding: 10px;margin-bottom: 100px">
+            <form method="post" style="width: 100%">
+                {% csrf_token %}
+                <h2 style="font-size: 20px;text-align: center;font-weight: bold;margin-bottom: 10px;color: green">To help
+                    fill the form below</h2>
+                <div class="row">
+                    <div class="col-6">
+                        <input class="sponsor_form_input" style="width: 100%" type="text" name="f_name" id="f_name" {% if sponsor %}value="{{ sponsor.first_name }}"{% else %}{% endif %} required
+                               placeholder="First Name">
+                    </div>
+                    <input type="number" name="child_id" value="{{ child.id }}" hidden="hidden">
+                    <div class="col-6">
+                        <input class="sponsor_form_input" style="width: 100%" type="text" name="l_name" id="l_name" {% if sponsor %}value="{{ sponsor.last_name }}"{% else %}{% endif %} required
+                               placeholder="Last Name">
+                    </div>
+                </div>
+                
+                <div>
+                    <input class="sponsor_form_input" style="width: 100%" type="email" name="email" id="email" {% if sponsor %}value="{{ sponsor.email }}"{% else %}{% endif %}  placeholder="Enter your email">
+                </div>
+
+                <div>
+                    <label for="number">Enter your M-Pesa number::</label>
+                    <input class="sponsor_form_input" style="width: 100%" type="tel" name="number" id="number">
+                </div>
+
+                <div>
+                    <label for="amount">Enter the amount to support:</label>
+                    <input class="sponsor_form_input" style="width: 100%" type="number" name="amount" id="amount">
+                </div>
+
+                <button style="width: 100%;padding: 10px;background: green;color: white;border: none;border-radius: 2px"
+                        type="submit">Submit
+                </button>
+                <hr>
+            <p style="text-align: center">Already sent but didn't confirm? <a href="{% url 'myapp:confirm_support' %}">Confirm</a></p>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

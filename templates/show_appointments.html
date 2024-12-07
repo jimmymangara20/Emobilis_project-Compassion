@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Appointments{% endblock title %}
+
+{% block content %}
+    <div class="row">
+     <div class="col col-11 col-md-7" style="margin: auto;margin-bottom: 400px;margin-top: 20px;padding: 5px;">
+    <div style="display: flex;flex-direction: row;justify-content: space-between;align-items: center">
+        <h3>Appointments</h3>
+        <a style="background: green;color: white;border-radius: 3px;padding: 9px 15px;font-size: 14px" href="{% url 'myapp:appointment' %}">Add Appointment</a>
+    </div>
+    <hr>
+    {% if appointments %}
+        <table class="table table-light" style="margin-top: 10px;border: 2px solid gray">
+            <tr>
+                <th>Date</th>
+                <th>Message</th>
+                <th colspan="2">Action</th>
+            </tr>
+            {% for appointment in appointments %}
+                <tr>
+                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.message }}</td>
+                <td><a href="{% url 'myapp:delete_appointments' appointment.id %}" class="btn btn-danger" style="padding: 6px 15px;font-size: 12px;color: white">Delete</a>
+                </td>
+                <td><a href="{% url 'myapp:edit_appointments' appointment.id %}" class="btn" style="background: green;padding: 6px 15px;font-size: 12px;color: white">Edit</a></td>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p style="font-size: 15px!important;margin-top: 20px">No appointments found.</p>
+    {% endif %}
+
+    </div>
+    </div>
+
+
+{% endblock content %}

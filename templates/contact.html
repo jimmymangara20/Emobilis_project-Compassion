@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Registration{% endblock title %}
+
+{% block content %}
+    <style>
+    .input-group-addon {
+        width: 35px;
+    }
+    .form-control {
+        font-size: 15px;
+    }
+    .form-control:focus {
+        outline: none!important;
+        box-shadow: none!important;
+        border: 1px solid green;
+    }
+    </style>
+
+    <!-- Display success and error messages -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col col-12 col-md-4" style="margin: 20px auto 200px;box-shadow: 0 0 4px rgba(0,0,0,0.24);border-radius: 10px;padding: 20px 10px">
+                <h1 style="text-align: center;font-size: 24px;font-weight: bold">Add Appointment</h1>
+                <hr>
+                <form method="post">
+                    {% csrf_token %}
+                    <!-- Username field -->
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+                            <input type="date" name="appointment_date" class="form-control"
+                                   placeholder="date">
+                        </div>
+                    </div>
+                    <textarea style="margin-bottom: 10px" name="message" class="form-control" placeholder="Enter your message here"></textarea>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn" style="width: 100%;background: green;color: white;padding: 7px;font-size: 15px;font-weight: bold">Submit</button>
+                </form>
+                <hr>
+                <p style="font-size: 15px;text-align: center"><a href="{% url 'myapp:show_appointments' %}">Go Back to Appointments</a></p>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

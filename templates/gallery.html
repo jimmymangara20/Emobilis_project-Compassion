@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Chuluni Compassion gallery{% endblock %}
+
+{% block content %}
+    <!-- Page Title -->
+    <div class="page-title accent-background">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">Chuluni Compassion Gallery</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="{% url 'myapp:index' %}">Home</a></li>
+            <li class="current">Gallery</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section">
+
+      <div class="container">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-app">Beneficiaries</li>
+            <li data-filter=".filter-product">In Primary and Highschool</li>
+            <li data-filter=".filter-branding">Alumni</li>
+          </ul><!-- End Portfolio Filters -->
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-1.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Beneficiary</h4>
+                <p>Hello, my name is <b>Juma Bakari</b> I am a proud beneficiary of Chuluni Compassion</p>
+                  <img src="{% static 'assets/img/masonry-portfolio/Beneficiary 01.jpg' %}" alt="">
+                <a href="{% url 'myapp:gallery' %}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="{% static 'assets/img/masonry-portfolio/Beneficiary 01.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Chuluni Compassion Beneficiary</h4>
+                <p>Hello, My name is Potential. I am a proud Beneficiary</p>
+                <a href="{% static 'assets/img/masonry-portfolio/Meru School gate.jpg' %}" title="Meru School" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-3.jpg" class="img-fluid' %}" alt="">
+              <div class="portfolio-info">
+                <h4>Branding 1</h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/masonry-portfolio-3.jpg' %}" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="{% static 'assets/img/masonry-portfolio/Compassion Beneficiaries.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>We are Team Compassion</h4>
+                <p>Our experience through compassion has been life transforming</p>
+                <a href="{% static 'static/assets/img/masonry-portfolio/Team Compassion.jpg' %}" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="{% static 'assets/img/masonry-portfolio/Joshua.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Chuluni Compassion Beneficiary</h4>
+                <p>Hello, My name is Joshua. I am a proud beneficiary</p>
+                <a href="{% static 'assets/img/masonry-portfolio/Kangaru school.jpg' %}" title="Kangaru School" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-6.jpg" class="img-fluid' %}" alt="">
+              <div class="portfolio-info">
+                <h4>Branding 2</h4>
+                <p>Lorem ipsum, dolor sit</p>
+                <a href="{% static 'assets/img/masonry-portfolio/masonry-portfolio-6.jpg' %}" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <img src="{% static 'assets/img/masonry-portfolio/Compassion ni home.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Chuluni Compassion ni home</h4>
+                <p>We are glad to be part of this great Family of grace</p>
+                <a href="{% static 'assets/img/masonry-portfolio/Chuluni proud beneficiaries.jpg' %}" title="Home of grace" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+              <img src="{% static 'assets/img/masonry-portfolio/Lilian.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Chuluni Compassion Beneficiary</h4>
+                <p>Hello. My name is Lilian. I am a proud beneficiary</p>
+                <a href="{% static 'assets/img/masonry-portfolio/State-House-Girls photo.jpg' %}" title="State House Girls School" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+              <img src="{% static 'assets/img/masonry-portfolio/Alumni.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Compassion Alumni</h4>
+                <p>Hello. My name is Kebaso. I am a proud alumni of Chuluni Compassion</p>
+                <a href="{% static 'assets/img/masonry-portfolio/Alumni innit.jpg' %}" title="Alumni innit" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+          </div><!-- End Portfolio Container -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Section -->
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Sponsorship{% endblock title %}
+
+{% block content %}
+<table class="table table-dark" style="margin-top: 100px">
+    <thead>
+        <tr>
+            <th>Beneficiary Name</th>
+            <th>Beneficiary Gender</th>
+            <th>Beneficiary Religion</th>
+            <th>Beneficiary Age</th>
+            <th colspan="2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if sponsorships %}
+            {% for sponsor in sponsorships %}
+                <tr>
+                    <td>{{ sponsor.name }}</td>
+                    <td>{{ sponsor.gender }}</td>
+                    <td>{{ sponsor.Religion }}</td>
+                    <td>{{ sponsor.age }}</td>
+                    <td>
+                        <a href="{% url 'myapp:delete_sponsorship' sponsor.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'myapp:edit_sponsorship' sponsor.id %}" class="btn btn-primary">Edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="9" class="text-center">No Sponsorship found.</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock content %}
+
+
