@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+    <style>
+    .form-control {
+        font-size: 15px;
+        width: 100%;
+    }
+    .form-control:focus {
+        outline: none!important;
+        box-shadow: none!important;
+        border: 1px solid green;
+    }
+    </style>
+    <div class="container">
+        {% if messages %}
+            <div class="row">
+                {% for message in messages %}
+                    <div class="col col-12 col-md-4"
+                         style="border: 1px solid {% if message.tags == 'error' %}red{% else %}green{% endif %};border-radius: 10px;padding: 10px;display: block;margin: auto">
+                        <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};text-align: center">
+                            {{ message }}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="row" style="margin-top: 20px;margin-bottom: 500px">
+            <div class="col col-12 col-md-6" style="margin: auto;display: flex;flex-direction: column;justify-content: center;align-items: center">
+                <img src="{{ child.photo.url }}" alt="" style="width: 150px;height: 150px;border-radius: 100px;object-fit: cover;object-position: top;border: 5px solid gray">
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-12 col-md-6">
+                        <label for="">First name:</label>
+                        <input type="text" class="form-control" value="{{ child.user.first_name }}" readonly>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="">Last Name:</label>
+                        <input type="text" class="form-control" value="{{ child.user.last_name }}" readonly>
+                    </div>
+                    <div class="col-12">
+                        <label for="">Email:</label>
+                        <input type="text" class="form-control" value="{{ child.user.email }}" readonly>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="">Amount Needed:</label>
+                        <input type="text" class="form-control" value="KES {{ child.amount_needed }}" readonly>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="">Amount Supported:</label>
+                        <input type="text" class="form-control" value="KES {{ child.amount_supported }}" readonly>
+                    </div>
+                    <div class="col-12">
+                        <label for="">Need Description:</label>
+                        <textarea  class="form-control" id="message" name="message" style="width: 100%" readonly>{{ child.need_description }}</textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

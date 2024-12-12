@@ -4,31 +4,37 @@
 
 {% block content %}
     <style>
-    .input-group-addon {
-        width: 35px;
-    }
-    .form-control {
-        font-size: 15px;
-    }
-    .form-control:focus {
-        outline: none!important;
-        box-shadow: none!important;
-        border: 1px solid green;
-    }
+        .input-group-addon {
+            width: 35px;
+        }
+
+        .form-control {
+            font-size: 15px;
+        }
+
+        .form-control:focus {
+            outline: none !important;
+            box-shadow: none !important;
+            border: 1px solid green;
+        }
     </style>
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">
-                    {{ message }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
 
     <div class="container">
+        {% if messages %}
+            <div class="row">
+                {% for message in messages %}
+                    <div class="col col-12 col-md-4"
+                         style="border: 1px solid {% if message.tags == 'error' %}red{% else %}green{% endif %};border-radius: 10px;padding: 10px;display: block;margin: auto">
+                        <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};text-align: center">
+                            {{ message }}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <div class="row">
-            <div class="col col-12 col-md-4" style="margin: 20px auto 200px;box-shadow: 0 0 4px rgba(0,0,0,0.24);border-radius: 10px;padding: 20px 10px">
+            <div class="col col-12 col-md-4"
+                 style="margin: 20px auto 200px;box-shadow: 0 0 4px rgba(0,0,0,0.24);border-radius: 10px;padding: 20px 10px">
                 <h1 style="text-align: center;font-size: 24px;font-weight: bold">LogIn</h1>
                 <hr>
                 <form method="post">
@@ -48,10 +54,14 @@
                                    value="" placeholder="Password">
                         </div>
                     </div>
-                    <button type="submit" class="btn"  style="width: 100%;background: green;color: white;padding: 7px;font-size: 15px;font-weight: bold">LogIn</button>
+                    <button type="submit" class="btn"
+                            style="width: 100%;background: green;color: white;padding: 7px;font-size: 15px;font-weight: bold">
+                        LogIn
+                    </button>
                 </form>
                 <hr>
-                <p style="font-size: 15px;text-align: center">Don't have an account? <a href="{% url 'accounts:register' %}">Register</a></p>
+                <p style="font-size: 15px;text-align: center">Don't have an account? <a
+                        href="{% url 'accounts:register' %}">Register</a></p>
             </div>
         </div>
     </div>

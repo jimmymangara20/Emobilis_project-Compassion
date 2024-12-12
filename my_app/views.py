@@ -35,8 +35,6 @@ consumer_key = MPESA_CONSUMER_KEY
 consumer_secret = MPESA_CONSUMER_SECRET
 
 
-
-
 # noinspection PyCompatibility
 def generate_access_token(consumer_key_p, consumer_secret_p):
     token_url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
@@ -70,7 +68,7 @@ def lipa_na_mpesa(amount, phone_number):
     cl = MpesaClient()
     account_reference = "10101010"  # Use a unique reference per transaction if needed
     transaction_desc = "Support A Child"
-    callback_url = "https://2cf4-41-89-22-3.ngrok-free.app/callback/"  # Ensure this is accessible
+    callback_url = "https://b414-41-89-22-187.ngrok-free.app/callback/"  # Ensure this is accessible
 
     # Initiate STK Push with the `django_daraja` MpesaClient
     try:
@@ -172,7 +170,7 @@ def about(request):
 
 
 def sponsor_a_child(request):
-    children = Child.objects.all()
+    children = [child for child in Child.objects.all() if child.is_fully_filled()]
     return render(request, "sponsor_a_child.html", {'children': children})
 
 
@@ -180,8 +178,24 @@ def team(request):
     return render(request, "team.html")
 
 
+def show_supports(request):
+    child = Child.objects.get(user=request.user)
+    supports = Sponsorship.objects.filter(sponsored_child=child, is_completed=True)
+    return render(request, 'supports.html', {'supports': supports})
+
+def show_mysupports(request):
+    supporter = request.user
+    supports = Sponsorship.objects.filter(user=supporter, is_completed=True)
+    return render(request, 'mysupports.html', {'mysupports': supports})
+
+
 def sponsor(request):
     return render(request, "sponsor.html")
+
+
+def profile(request):
+    child = Child.objects.get(user=request.user)
+    return render(request, "profile.html", {'child': child})
 
 
 def account(request):
@@ -198,7 +212,7 @@ def form(request):
 
 def show_appointments(request):
     appointments = Appointment.objects.filter(user=request.user)
-    return render(request, "show_appointments.html", {'appointments':appointments})
+    return render(request, "show_appointments.html", {'appointments': appointments})
 
 
 def support_later(request, id):
@@ -232,7 +246,7 @@ def get_support_laters(request):
     support_laters = SupportLater.objects.filter(user=request.user)
     for support_later in support_laters:
         children.append(support_later.child)
-    return render(request, "show_supportlaters.html", {'children':children})
+    return render(request, "show_supportlaters.html", {'children': children})
 
 
 # function to push appointments
@@ -274,8 +288,7 @@ def edit_appointments(request, appointment_id):
     # Put the condition for the form to update
     # Check if the request method is POST (form submission)
     if request.method == "POST":
-        appointment.phone = request.POST.get("phone")
-        appointment.date = request.POST.get("date")
+        appointment.date = request.POST.get("appointment_date")
         appointment.message = request.POST.get("message")
         appointment.save()
         return redirect('myapp:show_appointments')

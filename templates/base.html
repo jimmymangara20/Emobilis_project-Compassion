@@ -10,7 +10,8 @@
     <title>{% block title %}{% endblock %}</title>
     <!-- Favicons -->
     <link href="{% static 'assets/img/favicon.ico' %}" rel="icon">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"
+          id="bootstrap-css">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -33,16 +34,30 @@
 
 {% include 'header.html' %}
 {% block content %}
+
     <main class="main">
 
         <!-- Hero Section -->
         <section id="hero" class="hero section dark-background">
+            {% if messages %}
+                    <div class="row">
+                        {% for message in messages %}
+                            <div class="col col-12 col-md-4"
+                                 style="border: 1px solid {% if message.tags == 'error' %}red{% else %}green{% endif %};border-radius: 10px;padding: 10px;display: block;margin: auto">
+                                <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};text-align: center">
+                                    {{ message }}
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
 
             <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
                  data-bs-interval="5000">
 
-                <div class="carousel-item active">
-                    <img src="{% static 'assets/img/hero-carousel/background.jpg' %}" alt="">
+                <div class="carousel-item active"
+                     style="background-image: url('{% static 'assets/img/hero-carousel/background.jpg' %}');background-size: cover;background-position: top">
+                    {#                    <img src="{% static 'assets/img/hero-carousel/background.jpg' %}" alt="">#}
                     <div class="container">
                         <h2>Release a child from poverty in Jesus' name</h2>
                         <p>As KE0752 Chuluni Cdc we believe in releasing children from poverty and establishing a strong

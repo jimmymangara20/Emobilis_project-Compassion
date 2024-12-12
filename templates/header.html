@@ -28,17 +28,20 @@
               <li><a href="{% url 'myapp:team' %}">Team</a></li>
             </ul>
           </li>
-          <li><a href="{% url 'myapp:sponsor_a_child' %}">Sponsor A Child </a></li>
+        {% if user.is_beneficiary %}
+        {% else %}
+            <li><a href="{% url 'myapp:sponsor_a_child' %}">Sponsor A Child </a></li>
+        {% endif %}
           <li><a href="{% url 'myapp:gallery' %}">Gallery</a></li>
           <li class="dropdown"><a href="#" class="active"><span>My Account</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
              <ul style="min-width: 150px;padding: 10px">
                  {% if user.is_authenticated %}
                      {% if user.is_beneficiary %}
-                         <li><a href="#">Profile</a></li>
-                         <li><a href="#">Supports</a></li>
+                         <li><a href="{% url 'myapp:profile' %}">Profile</a></li>
+                         <li><a href="{% url 'myapp:show_supports' %}">Supports</a></li>
                          <li><a href="{% url 'myapp:show_appointments' %}">Appointments</a></li>
                      {% elif user.is_supporter %}
-                         <li><a href="#">Your Supports</a></li>
+                         <li><a href="{% url 'myapp:show_mysupports' %}">Your Supports</a></li>
                          <li><a href="{% url 'myapp:view_support_laters' %}">Support Later</a></li>
                          <li><a href="{% url 'myapp:show_appointments' %}">Appointments</a></li>
                      {% endif %}
@@ -51,21 +54,10 @@
                  {% endif %}
             </ul>
           </li>
-            
-            
-{#          <li><a href="{% url 'myapp:beneficiary' %}">Beneficiary</a></li>#}
           <li><a href="{% url 'myapp:appointment' %}">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
-{#      <div class="">#}
-{#        <a href="{% url 'accounts:register' %}"><button type="" class="btn btn secondary">Register</button></a>#}
-{#          #}
-{#        <a href="{% url 'accounts:login' %}" class="">Login</a>#}
-{#        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>#}
-{#        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>#}
-{#      </div>#}
 
     </div>
   </header>

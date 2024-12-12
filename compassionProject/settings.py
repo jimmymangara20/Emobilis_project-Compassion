@@ -26,7 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://2cf4-41-89-22-3.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://b414-41-89-22-187.ngrok-free.app']
 
 # Application definition
 
@@ -74,7 +74,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'compassionProject.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+#https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
     'default': {

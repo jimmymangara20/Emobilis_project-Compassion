@@ -30,7 +30,9 @@ class Sponsorship(models.Model):
     is_completed = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Sponsor {self.sponsor_name} to {self.sponsored_child.user.first_name}"
+        if self.sponsored_child and self.sponsored_child.user:
+            return f"Sponsor {self.sponsor_name} to {self.sponsored_child.user.first_name}"
+        return f"Sponsor {self.sponsor_name} (No child assigned)"
 
 
 # XAMPP

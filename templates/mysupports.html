@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Supports{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        {% if messages %}
+            <div class="row">
+                {% for message in messages %}
+                    <div class="col col-12 col-md-4"
+                         style="border: 1px solid {% if message.tags == 'error' %}red{% else %}green{% endif %};border-radius: 10px;padding: 10px;display: block;margin: auto">
+                        <p style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};text-align: center">
+                            {{ message }}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="row" style="margin-top: 20px;margin-bottom: 500px">
+            <div class="col col-12 col-md-5" style="margin: auto">
+                <h3 style="font-weight: bold">Supports</h3>
+                <hr>
+                {% if mysupports %}
+                    {% for support in mysupports %}
+                    <div style="width: 100%;padding: 15px;border: 1px solid gray;border-radius: 5px;display: flex;flex-direction: row;justify-content: space-between;align-items: center;margin-top: 10px">
+                        <p style="margin: 0">{{ support.sponsored_child.user.first_name }} {{ support.sponsored_child.user.last_name }}</p>
+                    <p style="margin: 0">Kes. <b>{{ support.amount }}</b></p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <p style="margin-top: 20px">You have not made any supports yet. God bless you as you purpose to support</p>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

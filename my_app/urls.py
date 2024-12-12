@@ -27,4 +27,7 @@ urlpatterns = [
     path('confirm_support/', views.confirm_support, name='confirm_support'),
     path('support_later/<int:id>', views.support_later, name='support_later'),
     path('view_support_later/', views.get_support_laters, name='view_support_laters'),
+    path('view_supports/', views.show_supports, name='show_supports'),
+    path('view_mysupports/', views.show_mysupports, name='show_mysupports'),
+    path('profile/', views.profile, name='profile'),
 ]
